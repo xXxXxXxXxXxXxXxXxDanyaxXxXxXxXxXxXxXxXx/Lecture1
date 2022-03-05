@@ -9,5 +9,5 @@ with open('input.txt') as f:
             if letter == ')':
                 down += 1
 result = up - down
-with open('output.txt','w') as h:
+with open('output1.txt','w') as h:
     h.write(str(result))
