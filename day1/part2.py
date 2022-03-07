@@ -9,6 +9,6 @@ with open('input.txt') as f:
             if letter == ')':
                 down += 1
             if (down - up) == 1:
-                with open('output.txt','w') as h:
+                with open('output2.txt','w') as h:
                     h.write(str(down + up))
                     break
