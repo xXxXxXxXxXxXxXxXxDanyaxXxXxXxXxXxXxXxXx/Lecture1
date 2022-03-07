@@ -29,5 +29,5 @@ with open('input.txt') as f:
         atribut = l * w * h + 2 * (min1 + min2)
         AllLength += atribut
 print(AllLength)
-with open('output1.txt','w') as h:
+with open('output2.txt','w') as h:
     h.write(str(AllLength))
