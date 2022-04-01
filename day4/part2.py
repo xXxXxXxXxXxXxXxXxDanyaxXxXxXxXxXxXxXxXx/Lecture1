@@ -13,7 +13,8 @@ with open('input.txt') as f:
                 count_zero += 1
             else:
                 break
-        print(iteration)
+        if iteration % 100000 == 0:
+            print(iteration)
         if count_zero == 6:
             search = True
             break
