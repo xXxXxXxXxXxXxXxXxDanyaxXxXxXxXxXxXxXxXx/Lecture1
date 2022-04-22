@@ -7,10 +7,10 @@ with open ('input.txt') as f:
     
     for i in range(len(list_)):
         line = list_[i]
-        line = line
-        local_memory = 0
+        line = line.strip()
+        local_memory = -1
         i = 0
-        while i < len(line) - 2:
+        while i < len(line) - 1:
             
             if line[i] == '\\' and line[i+1] == '"':
                 i += 2
@@ -27,7 +27,7 @@ with open ('input.txt') as f:
             else:
                 i += 1
                 local_memory += 1
-                
+   
         memory_ += local_memory
         code_ += len(line)
 
