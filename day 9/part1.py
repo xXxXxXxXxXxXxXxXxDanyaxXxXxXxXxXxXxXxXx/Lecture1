@@ -1,28 +1,32 @@
-import itertools
+import re, itertools
 
-with open('input.txt') as f:
-    line = f.readlines()
+def calc(f):
+    locations = set()
+    distance = {}
 
-location = []
-way = {}
-for i in range(len(line)):
-    string = line[i].split()
-    city1, city2 = string[0], string[2]
-    distance = int(string[4])
-    way[city1 + city2] = distance
-    way[city2 + city1] = distance
-    location.append(city1)
-    location.append(city2)
+    for line in f:
+        start, end = line.split(" ")[0], line.split(" ")[2]
 
-location = set(location)
+        locations.add(start)
+        locations.add(end)
 
-short = 100 ** 10
-for route in itertools.permutations(location):
-    route_length = 0
-    for city1, city2 in zip(route[:-1], route[1:]):
-        route_length += way[city1 + city2]
-    if route_length < short:
-        short = route_length
+        distance_between = int(re.findall("\d+", line)[0])
+        distance[(start, end)] = distance_between
+        distance[(end, start)] = distance_between
 
-with open('output1.txt', 'w') as f:
-    f.write(str(short))
+    return locations, distance
+
+
+with open("input.txt") as f1:
+    (locations, distance) = calc(f1)
+
+    path_lengths = {}
+
+    for path in itertools.permutations(locations):
+        segments = [(path[i], path[i + 1]) for i in range(0, len(locations) - 1)]
+        lengths = [distance[segment] for segment in segments]
+
+        path_lengths[path] = sum(lengths)
+
+with open('output1.txt', 'w') as f2:
+    print(str(min(path_lengths.values())), file=f2)
