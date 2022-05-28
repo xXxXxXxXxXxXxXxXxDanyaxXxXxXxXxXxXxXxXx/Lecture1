@@ -1,19 +1,18 @@
-with open('input.txt') as f:
-    l = int(f.readline())
+with open('input.txt') as f: # открыл файл и поместил в переменную f
+    l = int(f.readline()) # cчёл первую строку в l
 
-    set_ = set()
-    bin_ = bin(l)
-    l = bin_[2:len(bin_)]
+    set_ = set() # создаю множество 
+    bin_ = bin(l) # перевожу исходное число в биты
+    l = bin_[2:len(bin_)] # обрезаю в строке '0b' , получаю чистые биты 
 
-    for i in range(len(l)):
-        str_1 = l[:-1]
-        str_2 = l[-1:]
-        operand = str_2 + str_1
+    for i in range(len(l)): # цикл с кол-вом итераций равным длинне числа в бинарном представлении
+        str_1 = l[:-1] # формирую левый бинарный срез
+        str_2 = l[-1:] # формирую правый 
+        operand = str_2 + str_1 # определяю операнд, который будет осуществлять смещение , похоже на '>>', только там дописывались нули
         
-        set_.add(int(operand,2))
+        set_.add(int(operand,2)) # перевожу получившуюся бинарную комбинацию в десятичную систему и добавляю во множество
         
-        l = operand 
-        max_ = max(set_)
-        
-with open('output.txt','w') as h:
-    h.write(str(max_))
+        l = operand # обновляю итерируемый объект
+    max_ = max(set_) # определяю максимальный объект
+with open('output.txt','w') as h: # создаю|открываю файл в h
+    h.write(str(max_)) # записываю данные 
